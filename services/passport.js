@@ -1,5 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
 
@@ -19,6 +20,7 @@ passport.deserializeUser((id, done) => {
   });
 });
 
+// Google Strategy
 passport.use(
   new GoogleStrategy(
     {
@@ -28,7 +30,7 @@ passport.use(
       proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleID: profile.id })
+      User.findOne({ userID: profile.id })
         // existingUser is then name given
         .then(existingUser => {
           if (existingUser) {
@@ -37,7 +39,36 @@ passport.use(
           } else {
             //make new user with given googleID
             new User({
-              googleID: profile.id
+              userID: profile.id
+            })
+              .save()
+              .then(user => done(null, user));
+          }
+        });
+    }
+  )
+);
+
+// Facebook Strategy
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: keys.facebookClientID,
+      clientSecret: keys.facebookClientSecret,
+      callbackURL: "/auth/facebook/callback",
+      proxy: true
+    },
+    (accessToken, refreshToken, profile, done) => {
+      User.findOne({ userID: profile.id })
+        // existingUser is then name given
+        .then(existingUser => {
+          if (existingUser) {
+            //current user exists - do not make a new record
+            done(null, existingUser);
+          } else {
+            //make new user with given googleID
+            new User({
+              userID: profile.id
             })
               .save()
               .then(user => done(null, user));
