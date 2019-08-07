@@ -8,16 +8,27 @@ module.exports = app => {
       scope: ["profile", "email"]
     })
   );
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  app.get("/auth/google/callback", passport.authenticate("google"),
+    (req, res) => res.redirect('/')
+  );
 
   //Facebook Auth
   app.get("/auth/facebook", passport.authenticate("facebook"));
-  app.get("/auth/facebook/callback", passport.authenticate("facebook"));
+  app.get("/auth/facebook/callback", passport.authenticate("facebook"),
+    (req, res) => res.redirect('/')
+  );
+
+  //Local Auth
+  app.post('/login', passport.authenticate("local", {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+  }));
 
   //General Logout and Current User Routes
   app.get("/api/logout", (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
 
   app.get("/api/current-user", (req, res) => {
