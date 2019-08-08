@@ -18,9 +18,10 @@ class App extends React.Component {
             <div>
                 <BrowserRouter>
                     <div className='ui container'>
-                        <Header />
-                        <Route path='/' exact component={Landing} />
-                        <Route path='/login' component={Login} />
+                        <Header>
+                            <Route path='/' exact component={Landing} />
+                            <Route path='/login' component={Login} />
+                        </Header>
                     </div>
                 </BrowserRouter>
             </div>
