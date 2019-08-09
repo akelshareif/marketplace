@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Container } from 'semantic-ui-react';
 import * as actions from '../actions';
 import Header from './header/Header';
 import Landing from './Landing';
-import Login from './Login';
+import Login from './login/Login';
+import SignUp from './login/SignUp';
 import '../styles.css';
+
  
 class App extends React.Component {
 
@@ -17,12 +20,11 @@ class App extends React.Component {
         return(
             <div>
                 <BrowserRouter>
-                    <div className='ui container'>
-                        <Header>
-                            <Route path='/' exact component={Landing} />
-                            <Route path='/login' component={Login} />
-                        </Header>
-                    </div>
+                    <Header>
+                        <Route path='/' exact component={Landing} />
+                        <Route path='/login' exact component={Login} />
+                        <Route path='/login/create' component={SignUp} />
+                    </Header>
                 </BrowserRouter>
             </div>
         );

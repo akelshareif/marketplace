@@ -7,28 +7,10 @@
     margin-bottom: 2px !important;
 }
 
-.bottom-margin{
-    margin-bottom: 1rem !important;
-}
-
-.bottom-margin-half{
-    margin-bottom: 0.5rem !important;
-}
-
-.bottom-margin-negative{
-    margin-bottom: -1rem !important;
-}
-
-.left-margin{
+.password-reset-text-margins{
     margin-left: 33% !important;
 }
 
-.ui.large.icon.search.input{
-    width: 30rem;
-}
-
-
-/* New Styles */
-.search-style{
-    border-radius: 100px !important;
+.bottom-margin{
+    margin-bottom: 5px !important;
 }

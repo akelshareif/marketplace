@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Responsive, Sidebar, Menu, Search, Segment, Container, Image } from 'semantic-ui-react';
+import { Responsive, Sidebar, Menu, Search, Segment, Container, Icon } from 'semantic-ui-react';
 
 class MobileHeader extends React.Component {
 
@@ -15,9 +15,9 @@ class MobileHeader extends React.Component {
             case null:
                 return;
             case false:
-                return <Link to='/login' className='item item-text'>Sign In</Link>;
+                return <Menu.Item as={Link} to='/login' className='item-text'>Sign In</Menu.Item>
             default:
-                return <a className='item item-text' href='/api/logout'>Logout</a>;
+                return <Menu.Item as='a' href='/api/logout' className='item-text'>Logout</Menu.Item>
         }
     }
 
@@ -40,6 +40,9 @@ class MobileHeader extends React.Component {
                     visible={sidebarOpened}
                 >
                     <Menu.Item>
+                        <img src='http://www.pngmart.com/files/7/Market-Transparent-Images-PNG.png' style={{width: '3em', height: '3em'}} alt='logo' />
+                    </Menu.Item>
+                    <Menu.Item>
                         <Search placeholder='Search' size='large' />
                     </Menu.Item>
                     <Menu.Item as={Link} to='/' className='item-text'>
@@ -48,20 +51,20 @@ class MobileHeader extends React.Component {
                     {this.headerContent()}
                 </Sidebar>
                 <Sidebar.Pusher dimmed={sidebarOpened}>
+                    <Container>
                     <Segment
                         basic
                         vertical
                         textAlign='center'
                     >
-                        <Container>
-                            <Menu secondary size='large'>
-                                <Menu.Item onClick={this.handleToggle}>
-                                    <img src='http://www.pngmart.com/files/7/Market-Transparent-Images-PNG.png' alt='logo' />
-                                </Menu.Item>
-                            </Menu>
-                        </Container>
+                        <Menu secondary size='large'>
+                            <Menu.Item>
+                                <Icon name='sidebar' size='large' onClick={this.handleToggle}/>
+                            </Menu.Item>
+                        </Menu>
                     </Segment>
                     {children}
+                    </Container>
                 </Sidebar.Pusher>
             </Responsive>
         );

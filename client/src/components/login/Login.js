@@ -2,13 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Segment, Header, Form, Button, Divider, Icon } from 'semantic-ui-react';
 
-//check out react proptypes - maybe u can dive deeper into react now?
-//Finish off responsive nav with sidebar
-//Clean up styles.css file with BEM 
-//Hook up redux-form to submit and complete local auth
-//Make sure that the db user schema was edited if necessary
-//Build the account creation and password reset processes - multiple modals 
-//Complete the header conditional auth rendering
 
 const Login = () => {
     return(
@@ -17,7 +10,7 @@ const Login = () => {
                 <Grid.Column width={14}>
                     <Segment basic textAlign='center'>
                         <Header as='h2'>Welcome to MarketPlace</Header>
-                        <span>Sign in or <Link to='/login/create'>create an account</Link></span>
+                        <>Sign in or <Link to='/login/create'>create an account</Link></>
                     </Segment>
                 </Grid.Column>
             </Grid.Row>
@@ -27,12 +20,12 @@ const Login = () => {
                         <Form>
                             <Form.Input label='Email Address' type='email' />
                             <Form.Input label='Password' type='password' />
-                            <Form.Button as={Button} size='large' fluid content='Sign In' />
-                            <small><Link to='/login/reset' className='left-margin'>Reset your password</Link></small>
+                            <Form.Button as={Button} size='large' className='bottom-margin' content='Sign In' fluid/>
+                            <small><Link to='/login/reset' className='password-reset-text-margins'>Reset your password</Link></small>
                         </Form>
                         <Divider horizontal>OR</Divider>
                         <Header as='h2'>
-                            <Button as='a' href='/auth/facebook' color='facebook' size='large' fluid>
+                            <Button as='a' href='/auth/facebook' color='facebook' size='large' className='bottom-margin' fluid>
                                 <Icon name='facebook'/>
                                 Sign in with Facebook
                             </Button>
